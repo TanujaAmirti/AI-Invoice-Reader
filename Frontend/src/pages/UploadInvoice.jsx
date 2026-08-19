@@ -73,7 +73,7 @@ function UploadInvoice() {
       formData.append("invoice", file);
 
       const response = await fetch(
-        "https://ai-invoice-reader.netlify.appapi/invoices/upload",
+        "https://ai-invoice-reader.netlify.app/api/invoices/upload",
         {
           method: "POST",
           headers: {

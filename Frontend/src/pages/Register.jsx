@@ -50,7 +50,7 @@ const handleSubmit = async (e) => {
     setLoading(true);
 
     const response = await fetch(
-      "https://ai-invoice-reader.netlify.appapi/auth/register",
+      "https://ai-invoice-reader.netlify.app/api/auth/register",
       {
         method: "POST",
         headers: {

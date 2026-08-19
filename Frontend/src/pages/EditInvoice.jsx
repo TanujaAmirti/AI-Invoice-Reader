@@ -27,7 +27,7 @@ const EditInvoice = () => {
         }
 
         const response = await fetch(
-          `http://localhost:5000/api/invoices/${id}`,
+          `https://ai-invoice-reader.netlify.app/api/invoices/${id}`,
           {
             method: "GET",
             headers: {
@@ -229,7 +229,7 @@ const EditInvoice = () => {
       console.log("Updating invoice:", payload);
 
       const response = await fetch(
-        `http://localhost:5000/api/invoices/${id}`,
+        `https://ai-invoice-reader.netlify.app/api/invoices/${id}`,
         {
           method: "PUT",
           headers: {

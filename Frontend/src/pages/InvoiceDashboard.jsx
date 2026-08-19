@@ -68,7 +68,7 @@ const fetchInvoices = async () => {
     console.log("Fetching invoices from frontend...");
 
     const response = await fetch(
-      "http://localhost:5000/api/invoices",
+      "https://ai-invoice-reader.netlify.app/api/invoices",
       {
         method: "GET",
         headers: {
@@ -149,7 +149,7 @@ const fetchInvoices = async () => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/invoices/${invoiceId}`,
+        `https://ai-invoice-reader.netlify.app/api/invoices/${invoiceId}`,
         {
           method: "DELETE",
           headers: {
@@ -366,7 +366,7 @@ const speakResponse = (text) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      "http://localhost:5000/api/invoices/chat",
+      "https://ai-invoice-reader.netlify.app/api/invoices/chat",
       {
         method: "POST",
         headers: {

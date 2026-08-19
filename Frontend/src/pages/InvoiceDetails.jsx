@@ -40,7 +40,7 @@ const [editData, setEditData] = useState({
         }
 
         const response = await fetch(
-          `http://localhost:5000/api/invoices/${id}`,
+          `https://ai-invoice-reader.netlify.app/api/invoices/${id}`,
           {
             method: "GET",
             headers: {
@@ -193,7 +193,7 @@ const handleSaveChanges = async () => {
     }
 
     const response = await fetch(
-      `http://localhost:5000/api/invoices/${invoice.id}`,
+      `https://ai-invoice-reader.netlify.app/api/invoices/${invoice.id}`,
       {
         method: "PUT",
         headers: {
@@ -628,7 +628,7 @@ console.log("Invoice items:", items);
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/invoices/${invoice.id}`,
+        `https://ai-invoice-reader.netlify.app/api/invoices/${invoice.id}`,
         {
           method: "DELETE",
           headers: {

@@ -34,7 +34,7 @@ function Login() {
     setLoading(true);
 
     const response = await fetch(
-      "http://localhost:5000/api/auth/login",
+      "https://ai-invoice-reader.netlify.appapi/auth/login",
       {
         method: "POST",
         headers: {

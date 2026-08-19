@@ -139,7 +139,7 @@ const addItem = () => {
       console.log("Saving invoice:", invoice);
 
       const response = await fetch(
-        "http://localhost:5000/api/invoices/save",
+        "https://ai-invoice-reader.netlify.app/api/invoices/save",
         {
           method: "POST",
 

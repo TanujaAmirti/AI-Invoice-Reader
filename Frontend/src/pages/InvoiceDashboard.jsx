@@ -14,10 +14,16 @@ import {
   Send,
   Bot,
   Mic,
+  LogOut,
 } from "lucide-react";
 
 const InvoiceDashboard = () => {
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+  localStorage.removeItem("token");
+  navigate("/login");
+};
 
   const [invoices, setInvoices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -428,13 +434,25 @@ const speakResponse = (text) => {
             </p>
           </div>
 
-          <button
-            onClick={() => navigate("/upload-invoice")}
-            className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-700"
-          >
-            <Upload size={19} />
-            Upload Invoice
-          </button>
+          <div className="flex items-center gap-3">
+  {/* Upload Invoice */}
+  <button
+    onClick={() => navigate("/upload-invoice")}
+    className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-700"
+  >
+    <Upload size={19} />
+    Upload Invoice
+  </button>
+
+  {/* Logout */}
+  <button
+    onClick={handleLogout}
+    className="flex items-center gap-2 rounded-xl border border-red-200 bg-white px-5 py-3 font-semibold text-red-600 shadow-sm transition hover:bg-red-50"
+  >
+    <LogOut size={19} />
+    Logout
+  </button>
+</div>
         </div>
       </header>
 

@@ -13,6 +13,9 @@ function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Your deployed backend URL
+  const API_URL = "YOUR-BACKEND-URL";
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,57 +24,61 @@ function Login() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  setError("");
+    setError("");
 
-  if (!formData.email || !formData.password) {
-    setError("Please enter email and password");
-    return;
-  }
-
-  try {
-    setLoading(true);
-
-    const response = await fetch(
-      "https://ai-invoice-reader.netlify.app/api/auth/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      setError(data.message || "Login failed");
+    if (!formData.email || !formData.password) {
+      setError("Please enter email and password");
       return;
     }
 
-    // Save JWT token
-    localStorage.setItem("token", data.token);
+    try {
+      setLoading(true);
 
-    // Save logged-in user
-    if (data.user) {
-      localStorage.setItem("user", JSON.stringify(data.user));
+      const response = await fetch(
+        `${API_URL}/api/auth/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Login failed");
+        return;
+      }
+
+      // Save JWT token
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+
+      // Save logged-in user
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+      }
+
+      console.log("Login successful");
+      console.log("Token saved:", !!data.token);
+
+      // Navigate to dashboard
+      navigate("/dashboard");
+
+    } catch (error) {
+      console.error("Login error:", error);
+      setError(
+        "Unable to connect to the server. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
-
-    console.log("Login successful");
-    console.log("Token saved:", !!data.token);
-
-    // Go to Invoice Dashboard
-    navigate("/dashboard");
-
-  } catch (error) {
-    console.error("Login error:", error);
-    setError("Unable to connect to the server");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4 py-8">
@@ -108,6 +115,7 @@ function Login() {
             </p>
           </div>
 
+          {/* Error Message */}
           {error && (
             <div className="mb-5 px-4 py-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm">
               {error}
@@ -128,7 +136,9 @@ function Login() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                className="w-full px-4 py-3 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                autoComplete="email"
+                disabled={loading}
+                className="w-full px-4 py-3 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition disabled:bg-slate-100"
               />
             </div>
 
@@ -146,13 +156,18 @@ function Login() {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Enter your password"
-                  className="w-full px-4 py-3 pr-12 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  autoComplete="current-password"
+                  disabled={loading}
+                  className="w-full px-4 py-3 pr-12 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition disabled:bg-slate-100"
                 />
 
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-600"
+                  onClick={() =>
+                    setShowPassword(!showPassword)
+                  }
+                  disabled={loading}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-600 disabled:opacity-50"
                 >
                   {showPassword ? "🙈" : "👁️"}
                 </button>
@@ -184,12 +199,14 @@ function Login() {
           {/* Register */}
           <p className="text-center text-sm text-slate-500 mt-6">
             Don't have an account?{" "}
+
             <Link
               to="/register"
               className="text-blue-600 font-semibold hover:underline"
             >
               Create Account
             </Link>
+
           </p>
 
         </div>

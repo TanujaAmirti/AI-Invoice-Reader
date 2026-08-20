@@ -14,7 +14,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   // Your deployed backend URL
-  const API_URL = "YOUR-BACKEND-URL";
+  const API_URL = "https://ai-invoice-reader-backend.onrender.com";
 
   const handleChange = (e) => {
     setFormData({

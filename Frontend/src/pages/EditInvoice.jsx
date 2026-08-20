@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { API_URL } from "../services/api";
 
 const EditInvoice = () => {
   const { id } = useParams();
@@ -27,7 +28,7 @@ const EditInvoice = () => {
         }
 
         const response = await fetch(
-          `https://ai-invoice-reader.netlify.app/api/invoices/${id}`,
+          `${API_URL}/api/invoices/${id}`,
           {
             method: "GET",
             headers: {
@@ -229,7 +230,7 @@ const EditInvoice = () => {
       console.log("Updating invoice:", payload);
 
       const response = await fetch(
-        `https://ai-invoice-reader.netlify.app/api/invoices/${id}`,
+        `${API_URL}/api/invoices/${id}`,
         {
           method: "PUT",
           headers: {

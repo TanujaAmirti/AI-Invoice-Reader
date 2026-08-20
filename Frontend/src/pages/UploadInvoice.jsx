@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InvoiceReview from "./InvoiceReview";
+import { API_URL } from "../services/api";
 
 function UploadInvoice() {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ function UploadInvoice() {
       formData.append("invoice", file);
 
       const response = await fetch(
-        "https://ai-invoice-reader.netlify.app/api/invoices/upload",
+      `${API_URL}/api/invoices/upload`,
         {
           method: "POST",
           headers: {

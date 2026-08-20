@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_URL } from "../services/api";
 
 const InvoiceReview = ({ invoiceData, onSave, onCancel }) => {
   const [invoice, setInvoice] = useState({
@@ -139,7 +140,7 @@ const addItem = () => {
       console.log("Saving invoice:", invoice);
 
       const response = await fetch(
-        "https://ai-invoice-reader.netlify.app/api/invoices/save",
+        `${API_URL}/api/invoices/save`,
         {
           method: "POST",
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import jsPDF from "jspdf";
+import { API_URL } from "../services/api";
 // import html2canvas from "html2canvas";
 
 const InvoiceDetails = () => {
@@ -40,7 +41,7 @@ const [editData, setEditData] = useState({
         }
 
         const response = await fetch(
-          `https://ai-invoice-reader.netlify.app/api/invoices/${id}`,
+          `${API_URL}/api/invoices/${id}`,
           {
             method: "GET",
             headers: {
@@ -193,7 +194,7 @@ const handleSaveChanges = async () => {
     }
 
     const response = await fetch(
-      `https://ai-invoice-reader.netlify.app/api/invoices/${invoice.id}`,
+      `${API_URL}/api/invoices/${invoice.id}`,
       {
         method: "PUT",
         headers: {
@@ -628,7 +629,7 @@ console.log("Invoice items:", items);
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `https://ai-invoice-reader.netlify.app/api/invoices/${invoice.id}`,
+        `${API_URL}/api/invoices/${invoice.id}`,
         {
           method: "DELETE",
           headers: {

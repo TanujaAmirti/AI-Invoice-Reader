@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { API_URL } from "../services/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -12,9 +13,6 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // Your deployed backend URL
-  const API_URL = "https://ai-invoice-reader-backend.onrender.com";
 
   const handleChange = (e) => {
     setFormData({

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { API_URL } from "../services/api";
 
 
 function Register() {
@@ -50,7 +51,7 @@ const handleSubmit = async (e) => {
     setLoading(true);
 
     const response = await fetch(
-      "https://ai-invoice-reader.netlify.app/api/auth/register",
+      `${API_URL}/api/auth/register`,
       {
         method: "POST",
         headers: {
